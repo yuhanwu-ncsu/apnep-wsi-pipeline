@@ -1,0 +1,9 @@
+# Tracked through DVC for lineage and provenance
+/raw
+/reference
+/inputs
+/outputs
+
+# Temporary data folder
+/interim
+/tmp

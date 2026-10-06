@@ -1,0 +1,253 @@
+schema: '2.0'
+stages:
+  wsi-conservation:
+    cmd: python scripts/reproducibility/recreate_wsi.py --scenario conservation
+    deps:
+    - path: data/inputs
+      hash: md5
+      md5: d77041b3d5c29d37c6c36978d45b1b71.dir
+      size: 74697396
+      nfiles: 21
+    - path: data/metadata/repro_weight.yaml
+      hash: md5
+      md5: 40f56c044163280820d970e34bad1924
+      size: 10098
+    - path: data/reference
+      hash: md5
+      md5: b00f6ef462283cebea5f77cc171463f2.dir
+      size: 72485025
+      nfiles: 7
+    - path: scripts/reproducibility/recreate_wsi.py
+      hash: md5
+      md5: 53f7761e63c7f744a63d4f8445c6801e
+      size: 15189
+    - path: src/utils/
+      hash: md5
+      md5: 3f9ab4a59129decbebb157b8a46dd540.dir
+      size: 52616
+      nfiles: 15
+    outs:
+    - path: data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif
+      hash: md5
+      md5: cc5af3fe677a62ea240263e9fdc8d6a2
+      size: 6447775
+    - path: data/outputs/wsi/conservation/apnep-wsi-conserve.tif
+      hash: md5
+      md5: 6e2228bd52028e78b34c1e9eb9c26745
+      size: 24794329
+    - path: data/outputs/wsi/conservation/metrics.json
+      hash: md5
+      md5: 53dbe120b97ed718d49d7109c84e9794
+      size: 325
+    - path: data/outputs/wsi/conservation/report.json
+      hash: md5
+      md5: de61c30bdf67e6abc43a2c3430d8fc05
+      size: 4636
+  wsi-enhancement:
+    cmd: python scripts/reproducibility/recreate_wsi.py --scenario enhancement 
+      --focal-radius 8
+    deps:
+    - path: data/inputs
+      hash: md5
+      md5: d77041b3d5c29d37c6c36978d45b1b71.dir
+      size: 74697396
+      nfiles: 21
+    - path: data/metadata/repro_weight.yaml
+      hash: md5
+      md5: 40f56c044163280820d970e34bad1924
+      size: 10098
+    - path: data/reference
+      hash: md5
+      md5: b00f6ef462283cebea5f77cc171463f2.dir
+      size: 72485025
+      nfiles: 7
+    - path: scripts/reproducibility/recreate_wsi.py
+      hash: md5
+      md5: 53f7761e63c7f744a63d4f8445c6801e
+      size: 15189
+    - path: src/utils/
+      hash: md5
+      md5: 3f9ab4a59129decbebb157b8a46dd540.dir
+      size: 52616
+      nfiles: 15
+    outs:
+    - path: data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif
+      hash: md5
+      md5: 70c66145bd4743aa57bba366c8d8a7a9
+      size: 3011197
+    - path: data/outputs/wsi/enhancement/apnep-wsi-enhance.tif
+      hash: md5
+      md5: c72eba11cdaa9bb7af685623746a4009
+      size: 18637015
+    - path: data/outputs/wsi/enhancement/metrics.json
+      hash: md5
+      md5: 2e98d66cc0ca3dad586e66205f60cada
+      size: 318
+    - path: data/outputs/wsi/enhancement/report.json
+      hash: md5
+      md5: 359daf1097d992d74d8a710ca23104db
+      size: 4650
+  wsi-combine:
+    cmd: python scripts/reproducibility/combine_wsi.py
+    deps:
+    - path: data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif
+      hash: md5
+      md5: cc5af3fe677a62ea240263e9fdc8d6a2
+      size: 6447775
+    - path: data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif
+      hash: md5
+      md5: 70c66145bd4743aa57bba366c8d8a7a9
+      size: 3011197
+    - path: scripts/reproducibility/combine_wsi.py
+      hash: md5
+      md5: d21451635d40dd82128667c22eb94208
+      size: 2871
+    - path: src/utils/io.py
+      hash: md5
+      md5: 8796fe342bd7d7c40eb063f69fdaccaa
+      size: 3216
+    outs:
+    - path: data/outputs/wsi/combined/apnep-wsi-combine.tif
+      hash: md5
+      md5: df85958a3ac14a7008edd077dc513a80
+      size: 6588486
+    - path: data/outputs/wsi/combined/metrics.json
+      hash: md5
+      md5: a1bd9481449db0fbc0605ada43c078f2
+      size: 304
+  opportunity:
+    cmd: python scripts/reproducibility/create_opportunity.py
+    deps:
+    - path: data/inputs/apnep-padusmask.zip
+      hash: md5
+      md5: fd7400dab7219d25e171d52b4fae800d
+      size: 439544
+    - path: data/inputs/crpa/apnep-crpa.zip
+      hash: md5
+      md5: f8afcd2bcf35470c9b968c2fc65daf2b
+      size: 704144
+    - path: data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif
+      hash: md5
+      md5: cc5af3fe677a62ea240263e9fdc8d6a2
+      size: 6447775
+    - path: data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif
+      hash: md5
+      md5: 70c66145bd4743aa57bba366c8d8a7a9
+      size: 3011197
+    - path: scripts/reproducibility/create_opportunity.py
+      hash: md5
+      md5: 828ff1685b64d277be25c49b8e4c28fe
+      size: 4284
+    - path: src/utils/io.py
+      hash: md5
+      md5: 8796fe342bd7d7c40eb063f69fdaccaa
+      size: 3216
+    outs:
+    - path: data/outputs/opportunity/apnep-oppareas-padusmask.tif
+      hash: md5
+      md5: 8ba15460dbb8aa48f1f80d14d73675b2
+      size: 1680397
+    - path: data/outputs/opportunity/metrics.json
+      hash: md5
+      md5: 3927b004d4dae9bc4b50dbd1c9b3fabb
+      size: 283
+  metadata:
+    cmd: python scripts/metadata/generate_iso_metadata.py
+    deps:
+    - path: data/metadata/iso_metadata_config.yaml
+      hash: md5
+      md5: 8c10cc60b73ffa79b4beb2bef56657d7
+      size: 14052
+    - path: data/metadata/repro_weight.yaml
+      hash: md5
+      md5: a368b828952997949831b8a4da0c0309
+      size: 10100
+    - path: data/outputs/agol/multiband_wsi_county.tif
+      hash: md5
+      md5: 665effcb067757070fc99a368c25f887
+      size: 27229206
+    - path: data/outputs/opportunity/apnep-oppareas-padusmask.tif
+      hash: md5
+      md5: 8ba15460dbb8aa48f1f80d14d73675b2
+      size: 1680397
+    - path: data/outputs/wsi/combined/apnep-wsi-combine.tif
+      hash: md5
+      md5: df85958a3ac14a7008edd077dc513a80
+      size: 6588486
+    - path: data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif
+      hash: md5
+      md5: cc5af3fe677a62ea240263e9fdc8d6a2
+      size: 6447775
+    - path: data/outputs/wsi/conservation/apnep-wsi-conserve.tif
+      hash: md5
+      md5: 6e2228bd52028e78b34c1e9eb9c26745
+      size: 24794329
+    - path: data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif
+      hash: md5
+      md5: 70c66145bd4743aa57bba366c8d8a7a9
+      size: 3011197
+    - path: data/outputs/wsi/enhancement/apnep-wsi-enhance.tif
+      hash: md5
+      md5: c72eba11cdaa9bb7af685623746a4009
+      size: 18637015
+    - path: scripts/metadata/generate_iso_metadata.py
+      hash: md5
+      md5: 1cca35a5b1302e1b7b30489c38e6dd3a
+      size: 20747
+    outs:
+    - path: data/outputs/agol/multiband_wsi_county.tif.xml
+      hash: md5
+      md5: 49c8539f33601f7c9e133c59060f9f39
+      size: 7942
+    - path: data/outputs/opportunity/apnep-oppareas-padusmask.tif.xml
+      hash: md5
+      md5: 1b6497799ce5b6beb43de9c3013b6159
+      size: 8037
+    - path: data/outputs/wsi/combined/apnep-wsi-combine.tif.xml
+      hash: md5
+      md5: a94b21cccaacddf84e05c703dd83c23e
+      size: 7939
+    - path: data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif.xml
+      hash: md5
+      md5: ba73811a4cda93b984c3a364dcfb13c5
+      size: 9123
+    - path: data/outputs/wsi/conservation/apnep-wsi-conserve.tif.xml
+      hash: md5
+      md5: 38f0f396de05bd207bc6a51a083b7c82
+      size: 9494
+    - path: data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif.xml
+      hash: md5
+      md5: 9ecf542d26d299c13a6a776334adde91
+      size: 9527
+    - path: data/outputs/wsi/enhancement/apnep-wsi-enhance.tif.xml
+      hash: md5
+      md5: b96a2a56905600abaab21dbeb7d32754
+      size: 10112
+  agol-multiband:
+    cmd: python scripts/agol/build_multiband.py
+    deps:
+    - path: data/outputs/wsi/conservation/apnep-wsi-conserve.tif
+      hash: md5
+      md5: 6e2228bd52028e78b34c1e9eb9c26745
+      size: 24794329
+    - path: data/outputs/wsi/enhancement/apnep-wsi-enhance.tif
+      hash: md5
+      md5: c72eba11cdaa9bb7af685623746a4009
+      size: 18637015
+    - path: data/raw/boundaries/apnep-bnd-boundary.zip
+      hash: md5
+      md5: 92c61759216bcf500d82f85a56383a73
+      size: 108301
+    - path: scripts/agol/build_multiband.py
+      hash: md5
+      md5: 762014cd05938a30c2e12dd6bc25177b
+      size: 6395
+    outs:
+    - path: data/outputs/agol/county_map.json
+      hash: md5
+      md5: d40285f6d2291f0b668436c0c2651689
+      size: 1633
+    - path: data/outputs/agol/multiband_wsi_county.tif
+      hash: md5
+      md5: 665effcb067757070fc99a368c25f887
+      size: 27229206

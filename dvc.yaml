@@ -1,0 +1,89 @@
+stages:
+  wsi-conservation:
+    cmd: python scripts/reproducibility/recreate_wsi.py --scenario conservation
+    deps:
+      - scripts/reproducibility/recreate_wsi.py
+      - src/utils/
+      - data/metadata/repro_weight.yaml
+      - data/inputs
+      - data/reference
+    outs:
+      - data/outputs/wsi/conservation/apnep-wsi-conserve.tif
+      - data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif
+      - data/outputs/wsi/conservation/report.json
+    metrics:
+      - data/outputs/wsi/conservation/metrics.json
+
+  wsi-enhancement:
+    cmd: python scripts/reproducibility/recreate_wsi.py --scenario enhancement --focal-radius 8
+    deps:
+      - scripts/reproducibility/recreate_wsi.py
+      - src/utils/
+      - data/metadata/repro_weight.yaml
+      - data/inputs
+      - data/reference
+    outs:
+      - data/outputs/wsi/enhancement/apnep-wsi-enhance.tif
+      - data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif
+      - data/outputs/wsi/enhancement/report.json
+    metrics:
+      - data/outputs/wsi/enhancement/metrics.json
+
+  wsi-combine:
+    cmd: python scripts/reproducibility/combine_wsi.py
+    deps:
+      - scripts/reproducibility/combine_wsi.py
+      - src/utils/io.py
+      - data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif
+      - data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif
+    outs:
+      - data/outputs/wsi/combined/apnep-wsi-combine.tif
+    metrics:
+      - data/outputs/wsi/combined/metrics.json
+
+  opportunity:
+    cmd: python scripts/reproducibility/create_opportunity.py
+    deps:
+      - scripts/reproducibility/create_opportunity.py
+      - src/utils/io.py
+      - data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif
+      - data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif
+      - data/inputs/crpa/apnep-crpa.zip
+      - data/inputs/apnep-padusmask.zip
+    outs:
+      - data/outputs/opportunity/apnep-oppareas-padusmask.tif
+    metrics:
+      - data/outputs/opportunity/metrics.json
+
+  agol-multiband:
+    cmd: python scripts/agol/build_multiband.py
+    deps:
+      - scripts/agol/build_multiband.py
+      - data/outputs/wsi/conservation/apnep-wsi-conserve.tif
+      - data/outputs/wsi/enhancement/apnep-wsi-enhance.tif
+      - data/raw/boundaries/apnep-bnd-boundary.zip
+    outs:
+      - data/outputs/agol/multiband_wsi_county.tif
+      - data/outputs/agol/county_map.json
+
+  metadata:
+    cmd: python scripts/metadata/generate_iso_metadata.py
+    deps:
+      - scripts/metadata/generate_iso_metadata.py
+      - data/metadata/iso_metadata_config.yaml
+      - data/metadata/repro_weight.yaml
+      - data/outputs/wsi/conservation/apnep-wsi-conserve.tif
+      - data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif
+      - data/outputs/wsi/enhancement/apnep-wsi-enhance.tif
+      - data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif
+      - data/outputs/wsi/combined/apnep-wsi-combine.tif
+      - data/outputs/opportunity/apnep-oppareas-padusmask.tif
+      - data/outputs/agol/multiband_wsi_county.tif
+    outs:
+      - data/outputs/wsi/conservation/apnep-wsi-conserve.tif.xml
+      - data/outputs/wsi/conservation/apnep-wsi-conserve-highsuit.tif.xml
+      - data/outputs/wsi/enhancement/apnep-wsi-enhance.tif.xml
+      - data/outputs/wsi/enhancement/apnep-wsi-enhance-highsuit.tif.xml
+      - data/outputs/wsi/combined/apnep-wsi-combine.tif.xml
+      - data/outputs/opportunity/apnep-oppareas-padusmask.tif.xml
+      - data/outputs/agol/multiband_wsi_county.tif.xml

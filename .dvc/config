@@ -1,0 +1,9 @@
+[core]
+    remote = myremote
+    hardlink_lock = false
+[cache]
+    type = "reflink,copy"
+    protected = false
+['remote "myremote"']
+    url = gdrive://0AJUqxtRPFIS9Uk9PVA
+    gdrive_acknowledge_abuse = true

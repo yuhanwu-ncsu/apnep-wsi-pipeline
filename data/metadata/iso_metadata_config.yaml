@@ -1,0 +1,271 @@
+# ISO 19139 metadata for APNEP spatial targeting output rasters.
+# Follows the NC OneMap State and Local Government Metadata Profile template.
+# Read by scripts/metadata/generate_iso_metadata.py
+
+citation:
+  pub_date: "2026"
+  code_url: "https://github.com/bbcutts_ncstate/apnep-spatial-targeting"
+
+# Contact info
+contact:
+  org: "North Carolina State University, Center for Geospatial Analytics"
+  person: "Bethany B. Cutts"
+  position: "Associate Professor"
+  delivery_point: "2800 Faucette Dr, Campus Box 7106"
+  city: "Raleigh"
+  admin_area: "North Carolina"
+  postal_code: "27695"
+  country: "United States"
+  email: "bbcutts@ncsu.edu"
+  url: "https://orcid.org/0000-0001-7879-526X"
+  role: "principalInvestigator"
+
+description:
+  titles:
+    apnep-wsi-conserve: "APNEP Wetland Suitability Index, Conservation Scenario, Albemarle-Pamlico Estuarine System, North Carolina and Virginia, 2024"
+    apnep-wsi-conserve-highsuit: "APNEP High Suitability Areas, Conservation Scenario, Albemarle-Pamlico Estuarine System, North Carolina and Virginia, 2024"
+    apnep-wsi-enhance: "APNEP Wetland Suitability Index, Enhancement Scenario, Albemarle-Pamlico Estuarine System, North Carolina and Virginia, 2024-2070"
+    apnep-wsi-enhance-highsuit: "APNEP High Suitability Areas, Enhancement Scenario, Albemarle-Pamlico Estuarine System, North Carolina and Virginia, 2024-2070"
+    apnep-wsi-combine: "APNEP Combined Wetland Suitability, Conservation and Enhancement Overlap, Albemarle-Pamlico Estuarine System, North Carolina and Virginia"
+    apnep-oppareas-padusmask: "APNEP Wetland Conservation and Enhancement Opportunity Areas, Albemarle-Pamlico Estuarine System, North Carolina and Virginia"
+    apnep-wsi-popup-multiband: "APNEP Wetland Suitability Popup Layer, Albemarle-Pamlico Estuarine System, North Carolina and Virginia"
+
+  abstracts:
+    apnep-wsi-conserve: >
+      Wetland Suitability Index (WSI) raster for the conservation scenario in the
+      Albemarle-Pamlico river basin, North Carolina. Pixel values represent a
+      weighted suitability score (0.0 to 5.0 in 0.25-step increments) derived from
+      a weighted overlay of eight input layers: existing wetlands, riparian areas,
+      low-barrier landcover, soil drainage, and slope as scoring layers; open water,
+      high-barrier landcover, and contaminated lands as exclusion masks. Cell size
+      is 30 meters; coordinate system is NAD83 / North Carolina State Plane
+      (EPSG:32119). Produced for the Albemarle-Pamlico National Estuary Partnership
+      (APNEP) by North Carolina State University, Center for Geospatial Analytics.
+
+    apnep-wsi-conserve-highsuit: >
+      Binary raster identifying high-suitability areas for wetland conservation in
+      the Albemarle-Pamlico river basin, North Carolina. Derived by applying a
+      threshold of 3.5 to the conservation Wetland Suitability Index (WSI). Pixel
+      values: 1 = high suitability, 0 = below threshold. NoData = 255. Cell size
+      is 30 meters; coordinate system is NAD83 / North Carolina State Plane
+      (EPSG:32119).
+
+    apnep-wsi-enhance: >
+      Wetland Suitability Index (WSI) raster for the enhancement scenario in the
+      Albemarle-Pamlico river basin, North Carolina. Pixel values represent a
+      weighted suitability score (0.0 to 5.0 in 0.25-step increments) derived from
+      a weighted overlay of eight input layers: potential wetlands from the Sohl et
+      al. (2018) conterminous United States land cover projections (2070), riparian
+      areas, low-barrier landcover, soil
+      drainage, and slope as scoring layers; open water, high-barrier landcover, and
+      contaminated lands as exclusion masks. A circular focal mean (radius 8 pixels,
+      approximately 240 meters) was applied for spatial smoothing. Cell size is 30
+      meters; coordinate system is NAD83 / North Carolina State Plane (EPSG:32119).
+      Produced for the Albemarle-Pamlico National Estuary Partnership (APNEP) by
+      North Carolina State University, Center for Geospatial Analytics.
+
+    apnep-wsi-enhance-highsuit: >
+      Binary raster identifying high-suitability areas for wetland enhancement in
+      the Albemarle-Pamlico river basin, North Carolina. Derived by applying a
+      threshold of 3.5 to the enhancement Wetland Suitability Index (WSI). Pixel
+      values: 1 = high suitability, 0 = below threshold. NoData = 255. Cell size
+      is 30 meters; coordinate system is NAD83 / North Carolina State Plane
+      (EPSG:32119).
+
+    apnep-wsi-combine: >
+      Combined wetland suitability raster showing overlap between conservation and
+      enhancement high-suitability areas in the Albemarle-Pamlico river basin, North
+      Carolina. Derived by overlaying the conservation and enhancement high-suitability
+      binary rasters. Pixel encoding: 0 = neither scenario, 1 = conservation only,
+      2 = enhancement only, 3 = both conservation and enhancement. NoData = 255.
+      Cell size is 30 meters; coordinate system is NAD83 / North Carolina State Plane
+      (EPSG:32119).
+
+    apnep-oppareas-padusmask: >
+      Opportunity areas for wetland conservation and enhancement in the
+      Albemarle-Pamlico river basin, North Carolina. Derived from the combined
+      high-suitability raster intersected with Community Resilience
+      Priority Areas (CRPA) 300-meter buffer zones (class 4), with lands from
+      the Protected Areas
+      Database of the United States (PADUS) excluded. Pixel encoding: 0 = no
+      opportunity, 1 = conservation opportunity only, 2 = enhancement opportunity
+      only, 3 = both, 15 = PADUS-protected area (NoData). Cell size is 30 meters;
+      coordinate system is NAD83 / North Carolina State Plane (EPSG:32119).
+
+    apnep-wsi-popup-multiband: >
+      Three-band raster built for popup display in the interactive web map.
+      Band 1 holds the conservation Wetland Suitability Index score (0.0 to 5.0),
+      Band 2 holds the enhancement Wetland Suitability Index score (0.0 to 5.0),
+      and Band 3 holds county GEOIDs rasterized from U.S. Census Bureau
+      TIGER/Line 2024 county boundaries (500k generalized) for county-name
+      lookup. Cell size is 30 meters; coordinate system is NAD83 / North
+      Carolina State Plane (EPSG:32119).
+
+keywords:
+  theme:
+    - "wetlands"
+    - "conservation"
+    - "enhancement"
+    - "suitability"
+    - "spatial targeting"
+    - "weighted overlay"
+    - "APNEP"
+  iso_topic:
+    - "environment"
+    - "inlandWaters"
+  place:
+    - "Albemarle-Pamlico"
+    - "North Carolina"
+    - "Virginia"
+    - "United States"
+
+spatial:
+  crs: "EPSG:32119"
+
+temporal:
+  conservation:
+    begin: "2024"
+    end: "2024"
+  enhancement:
+    begin: "2024"
+    end: "2070"
+  combined:
+    begin: "2024"
+    end: "2070"
+
+access:
+  status: "completed"
+  maintenance: "irregular"
+
+# Use limitations — applies to all output rasters
+use_limitations: >
+  The creators shall not be held liable for improper or incorrect use of the data
+  described and/or contained herein. While we make every reasonable effort to ensure
+  the accuracy and completeness of the data provided, it may not meet the necessary
+  accuracy or completeness required for every intended use. This data is distributed
+  in the hope that it will be useful, but WITHOUT ANY WARRANTY, not even the implied
+  warranties of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Users are
+  responsible for using the data in a manner consistent with the limitations of
+  geospatial data in general and these data in particular.
+
+# Credit / attribution (displayed in Catalog and ArcGIS Pro item description)
+credits: "North Carolina State University, Center for Geospatial Analytics. Produced for the Albemarle-Pamlico National Estuary Partnership (APNEP)."
+
+# Known issues / quality caveats (appended to lineage statement)
+known_issues: >
+  30-m resolution limits application to regional targeting; the rasters are
+  not suitable for parcel-level decisions. The enhancement scenario depends
+  on modeled 2070 land cover with inherent uncertainty. The 3.5 threshold is
+  a planning cutoff, not an ecological boundary — pixels just below it may
+  still hold restoration value. Focal smoothing (enhancement only) merges
+  nearby patches and may dilute small, isolated wetland pockets.
+
+# License / access constraints
+license:
+  access_level: "public"
+  use_constraints: >
+    This work is licensed under a Creative Commons Attribution 4.0 International
+    License (CC BY 4.0). Users are free to share and adapt the material provided
+    appropriate credit is given.
+  distribution_url: "https://doi.org/10.5281/zenodo.21075002"
+
+# Project description (for supplementary abstract context)
+project_description: >
+  This framework identifies areas where wetland conservation or enhancement
+  will have the greatest impact for communities in the Albemarle-Pamlico
+  estuarine system. It integrates two components: (1) a Wetland Suitability
+  Index (WSI) that evaluates biophysical restoration potential from existing
+  wetlands, riparian zones, landcover, soil drainage, and slope under current
+  and projected 2070 conditions, and (2) Community Resilience Priority Areas
+  (CRPA) that identify disadvantaged communities using the EPA EJScreen, the
+  Climate and Economic Justice Screening Tool, FUTURES 3 land-change forecasts,
+  and the Headwaters Economics Rural Capacity Index. Opportunity areas are
+  identified where high wetland suitability intersects CRPA buffer zones,
+  with protected lands excluded.
+
+# Per-raster contentInfo section (attributeDescription + contentType)
+content:
+  apnep-wsi-conserve:
+    attribute_description: >
+      Band 1 - Wetland Suitability Index (WSI) score. Values range from 0.0 to
+      5.0 in 0.25-step increments. Higher values indicate greater suitability for
+      wetland conservation. NoData pixels have no value.
+    content_type: "thematicClassification"
+
+  apnep-wsi-conserve-highsuit:
+    attribute_description: >
+      Band 1 - Binary high suitability classification. 1 = above threshold (WSI
+      >= 3.5), 0 = below threshold. NoData = 255.
+    content_type: "thematicClassification"
+
+  apnep-wsi-enhance:
+    attribute_description: >
+      Band 1 - Wetland Suitability Index (WSI) score. Values range from 0.0 to
+      5.0 in 0.25-step increments. Higher values indicate greater suitability for
+      wetland enhancement. Spatial smoothing applied. NoData pixels have no value.
+    content_type: "thematicClassification"
+
+  apnep-wsi-enhance-highsuit:
+    attribute_description: >
+      Band 1 - Binary high suitability classification. 1 = above threshold (WSI
+      >= 3.5), 0 = below threshold. NoData = 255.
+    content_type: "thematicClassification"
+
+  apnep-wsi-combine:
+    attribute_description: >
+      Band 1 - Combined suitability class. 0 = neither scenario, 1 = conservation
+      only, 2 = enhancement only, 3 = both conservation and enhancement.
+      NoData = 255.
+    content_type: "thematicClassification"
+
+  apnep-oppareas-padusmask:
+    attribute_description: >
+      Band 1 - Opportunity area class. 0 = no opportunity, 1 = conservation
+      opportunity only, 2 = enhancement opportunity only, 3 = both, 15 = PADUS
+      protected area (NoData).
+    content_type: "thematicClassification"
+
+  apnep-wsi-popup-multiband:
+    attribute_description: >
+      Band 1 - Conservation WSI score (0.0 to 5.0). Band 2 - Enhancement WSI
+      score (0.0 to 5.0). Band 3 - County GEOID integer for county-name lookup.
+    content_type: "thematicClassification"
+
+# Per-scenario lineage processStep descriptions
+# Source data citations are appended automatically from repro_weight.yaml
+lineage:
+  conservation:
+    description: >
+      Weighted overlay of eight suitability and constraint layers. Score layers:
+      existing wetlands (weight 2), riparian areas (weight 2), low-barrier landcover
+      (weight 1), soil drainage (weight 1), slope (weight 1). Exclusion masks: open
+      water, high-barrier landcover, contaminated lands. The raw weighted sum was
+      classified to 0.25-step increments (range 0.0-5.0). A threshold of 3.5 was
+      applied to produce the binary high-suitability layer.
+  enhancement:
+    description: >
+      Weighted overlay of eight suitability and constraint layers. Score layers:
+      potential wetlands 2070 from the Sohl et al. (2018) land cover projections (weight 2), riparian areas
+      (weight 2), low-barrier landcover (weight 1), soil drainage (weight 1), slope
+      (weight 1). Exclusion masks: open water, high-barrier landcover, contaminated
+      lands. The raw weighted sum was classified to 0.25-step increments (range
+      0.0-5.0). A circular focal mean (radius 8 pixels, approximately 240 meters)
+      was applied for spatial smoothing, then re-classified to 0.25 steps. A
+      threshold of 3.5 was applied to produce the binary high-suitability layer.
+  combine:
+    description: >
+      The conservation and enhancement high-suitability binary rasters were combined
+      by adding conservation (0 or 1) to 2 times enhancement (0 or 1), producing
+      four classes: 0 = neither, 1 = conservation only, 2 = enhancement only, 3 = both.
+  popup:
+    description: >
+      The conservation and enhancement WSI rasters were assembled into a
+      three-band GeoTIFF (bands 1-2 = WSI scores, band 3 = county GEOIDs
+      rasterized from U.S. Census Bureau TIGER/Line 2024 county boundaries,
+      500k generalized), masked to the APNEP management boundary for popup
+      display in the interactive web map.
+  opportunity:
+    description: >
+      The combined high-suitability raster was intersected with Community
+      Resilience Priority Areas (CRPA) 300-meter buffer zones (class 4). Areas within the
+      Protected Areas Database of the United States (PADUS) were set to NoData.

@@ -1,0 +1,71 @@
+[workspace]
+authors = ["Yuhan Wu <307619505+yuhanwu-ncsu@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "apnep-reproducibility"
+platforms = ["win-64", "linux-64", "osx-arm64"]
+version = "0.1.0"
+
+# ============================================================
+# Default feature — shared by ALL environments
+# Only the bare minimum: Python + DVC for data versioning
+# ============================================================
+[dependencies]
+python = "3.12.*"
+pip = "*"
+# Data versioning (needed in both default and processing)
+dvc = ">=3.0"
+dvc-gdrive = "*"
+google-api-python-client = "*"
+pyyaml = "*"
+
+# Shared tasks — available in all environments
+[tasks]
+# sync = "dvc pull"  # Uncomment to use: pull data from the Shared Drive
+
+# ============================================================
+# Processing feature — full spatial analysis stack
+# Only included in the 'processing' environment (personal machines).
+# Not installed in 'default' (VCL / data-hosting / collaborators).
+#
+# PYTHONPATH lives here because the default env
+# has no need to build src/ or import from it.
+# ============================================================
+[feature.processing.dependencies]
+# Spatial I/O and processing
+gdal = ">=3.9"
+rasterio = "*"
+geopandas = "*"
+rioxarray = "*"       # Raster math & clipping
+shapely = ">=2.0"     # Core geometry engine
+fiona = ">=1.10.1,<2"
+
+# Visualization & exploration
+matplotlib = "*"       # Visual
+ipykernel = "*"        # Jupyter kernel
+notebook = "*"
+
+# Validation & data helpers
+pytest = "*"           # Test module
+openpyxl = ">=3.1.5,<4"
+
+[feature.processing.activation]
+env = { PYTHONPATH = "src", PYTHONUTF8 = "1" }
+
+[feature.processing.tasks]
+notebook = { cmd = ["jupyter", "notebook", "--notebook-dir=."], description = "Start Jupyter Notebook Server at default port" }
+reproduce = { cmd = "dvc repro", description = "Run DVC pipeline to reproduce WSI outputs" }
+
+# ============================================================
+# Environments
+# ============================================================
+# default    = base feature only
+#              Python + DVC — lightweight, for collaborators and VCL.
+#              Usage: pixi install / pixi run <cmd>
+#
+# processing = processing feature + default feature
+#              Full spatial stack for local development.
+#              Usage: pixi install -e processing
+#                     pixi run -e processing notebook
+[environments]
+default = []
+processing = ["processing"]

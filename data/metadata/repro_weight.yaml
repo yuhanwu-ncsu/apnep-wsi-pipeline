@@ -1,0 +1,188 @@
+version: 1
+title: "Weight metadata for reproducibility"
+source_markdown: "data/metadata/repro_weight.md"
+
+conventions:
+  suitability:
+    include_value: 1
+    exclude_value: 0
+    mask_value: -1
+  nodata_value: 255
+  notes:
+    - "Variables with mask_value (-1) indicate constraints/exclusions."
+    - "Weights are for weighted overlay integration where applicable."
+
+wsi:
+  conservation_2024:
+    layers:
+      - key: existing_wetlands
+        label: "Existing Wetlands"
+        description: "Represents stable, high-functioning wetland systems that anchor hydrologic and ecological processes."
+        contribute: 1
+        weight: 2
+        source: "U.S. Geological Survey (USGS), 2024, Annual NLCD Collection 1 Science Products. https://doi.org/10.5066/P94UXNTS."
+      - key: riparian_areas
+        label: "Riparian Areas"
+        description: "Buffer around existing wetlands, providing necessary water flow and connectivity for wetland ecosystems."
+        contribute: 1
+        weight: 2
+        source: "50m buffer from Existing Wetlands (constructed by authors)"
+      - key: open_water
+        label: "Open Water"
+        description: "Permanently inundated areas such as lakes and ponds are excluded because they do not provide conservation opportunity."
+        contribute: 1
+        weight: null
+        source: "U.S. Geological Survey (USGS), 2024, Annual NLCD Collection 1 Science Products. https://doi.org/10.5066/P94UXNTS."
+        note: "Excluded/masked in the workflow (no weight)."
+      - key: low_barrier_landcover
+        label: "Low Barrier Landcover"
+        description: "Forests, shrublands, and grasslands (Natural Areas) offering minimal resistance to wetland conservation and hydrologic connectivity."
+        contribute: 1
+        weight: 1
+        source: "U.S. Geological Survey (USGS), 2024, Annual NLCD Collection 1 Science Products. https://doi.org/10.5066/P94UXNTS."
+      - key: high_barrier_landcover
+        label: "High Barrier Landcover"
+        description: "Intensively developed or impervious surfaces (Developed & Cultivated) that disrupt natural hydrology and constrain conservation potential."
+        contribute: 1
+        weight: null
+        source: "U.S. Geological Survey (USGS), 2024, Annual NLCD Collection 1 Science Products. https://doi.org/10.5066/P94UXNTS."
+        note: "Excluded/masked in the workflow (no weight)."
+      - key: soil_groundwater_hazards
+        label: "Soil-Groundwater Hazards"
+        description: "Polluted areas excluded to avoid ecological and community health risks during conservation planning."
+        contribute: -1
+        weight: null
+        source: "U.S. Environmental Protection Agency (EPA), 2024, Cleanups in My Community (CIMC). https://www.epa.gov/cleanups/cleanups-my-community."
+      - key: soil_drainage
+        label: "Soil Drainage"
+        description: "Poorly or somewhat poorly drained soils support wetland persistence; excessively drained soils excluded."
+        contribute: 1
+        weight: 1
+        source: "Soil Survey Staff, 2025, Gridded Soil Survey Geographic (gSSURGO) Database, USDA NRCS. https://www.nrcs.usda.gov/resources/data-and-reports/ssurgo-portal."
+      - key: slope
+        label: "Slope"
+        description: "Gentle slopes (< 5°) favor water retention and hydrologic stability for existing wetlands."
+        contribute: 1
+        weight: 1
+        source: "NOAA Office for Coastal Management (OCM), 2014, Coastal Inundation Digital Elevation Model, 3m, NAVD88. https://coast.noaa.gov/slrdata/DEMs/index.html; U.S. Geological Survey (USGS), 2021, 3DEP 1/3 arc-second Digital Elevation Model. https://doi.org/10.5069/G98K778D."
+
+  enhancement_2070:
+    layers:
+      - key: potential_wetlands_2070
+        label: "Potential Wetlands - 2070"
+        description: "Current wetlands, areas prioritized for conservation and proximity to remnant systems."
+        contribute: 1
+        weight: 2
+        source: "Sohl, T.L., et al., 2018, Conterminous United States Land Cover Projections - 1992 to 2100. https://doi.org/10.5066/P95AK9HP."
+      - key: riparian_areas_2070
+        label: "Riparian Areas - 2070"
+        description: "50-meter buffer around existing wetlands, providing necessary water flow and connectivity for wetland ecosystems."
+        contribute: 1
+        weight: 2
+        source: "50m buffer from Potential Wetlands (constructed by authors)"
+      - key: open_water_2070
+        label: "Open Water - 2070"
+        description: "Permanent open water areas are excluded since they lack restoration feasibility and are already inundated."
+        contribute: 1
+        weight: null
+        source: "Sohl, T.L., et al., 2018, Conterminous United States Land Cover Projections - 1992 to 2100. https://doi.org/10.5066/P95AK9HP."
+        note: "Excluded/masked in the workflow (no weight)."
+      - key: low_barrier_landcover_2070
+        label: "Low Barrier Landcover - 2070"
+        description: "Areas of natural landscapes that provide minimal resistance to restoration (e.g., forests, shrublands, and other vegetated cover)."
+        contribute: 1
+        weight: 1
+        source: "Sohl, T.L., et al., 2018, Conterminous United States Land Cover Projections - 1992 to 2100. https://doi.org/10.5066/P95AK9HP."
+      - key: high_barrier_landcover_2070
+        label: "High Barrier Landcover - 2070"
+        description: "Areas of high-intensity developed infrastructure, which pose significant challenges to wetland restoration (e.g., buildings and impervious surfaces)."
+        contribute: -1
+        weight: null
+        source: "Sohl, T.L., et al., 2018, Conterminous United States Land Cover Projections - 1992 to 2100. https://doi.org/10.5066/P95AK9HP."
+      - key: soil_groundwater_hazards
+        label: "Soil-Groundwater Hazards"
+        description: "Areas polluted by hazardous substances, used as constraints or exclusions to avoid prioritizing contaminated areas."
+        contribute: -1
+        weight: null
+        source: "U.S. Environmental Protection Agency (EPA), 2024, Cleanups in My Community (CIMC). https://www.epa.gov/cleanups/cleanups-my-community."
+      - key: soil_drainage
+        label: "Soil Drainage"
+        description: "Poorly drained soils enhance hydrologic retention and restoration viability."
+        contribute: 1
+        weight: 1
+        source: "Soil Survey Staff, 2025, Gridded Soil Survey Geographic (gSSURGO) Database, USDA NRCS. https://www.nrcs.usda.gov/resources/data-and-reports/ssurgo-portal."
+      - key: slope
+        label: "Slope"
+        description: "Gentle slopes (0–5°) promote water retention; steep slopes (> 5°) excluded due to poor restoration potential."
+        contribute: 1
+        weight: 1
+        source: "NOAA Office for Coastal Management (OCM), 2014, Coastal Inundation Digital Elevation Model, 3m, NAVD88. https://coast.noaa.gov/slrdata/DEMs/index.html; U.S. Geological Survey (USGS), 2021, 3DEP 1/3 arc-second Digital Elevation Model. https://doi.org/10.5069/G98K778D."
+
+recodes:
+  land_use_land_cover:
+    description: "Suitability recode for land use / land cover."
+    categories:
+      - when: "presence of natural or undeveloped land"
+        value: 1.0
+        rationale: "Indicates open or natural landscapes suitable for wetland conservation or enhancement."
+      - when: "absence (developed / cultivated)"
+        value: 0.0
+        rationale: "Developed or cultivated land unsuitable for wetland feasibility."
+
+  contaminated_land:
+    description: "Suitability recode for contaminated land constraint."
+    categories:
+      - when: "presence"
+        value: 1.0
+        rationale: "Identifies areas with documented contamination to ensure proper exclusion and monitoring."
+      - when: "absence"
+        value: 0.0
+        rationale: "No contamination; suitable for inclusion in suitability analysis."
+
+  protected_areas:
+    description: "Suitability recode for protected areas constraint."
+    categories:
+      - when: "presence"
+        value: 1.0
+        rationale: "Lands permanently protected and managed primarily for biodiversity conservation. Excluded from opportunity-area targeting."
+      - when: "absence"
+        value: 0.0
+        rationale: "Unprotected landscapes eligible for new conservation or enhancement investments."
+
+  slope_degrees:
+    description: "Suitability recode for slope (degrees)."
+    bins:
+      - range: [0, 1]
+        value: 1.0
+        rationale: "Very flat terrain with stable hydrology; ideal for wetland formation, persistence, and surface-water retention."
+      - range: [1, 2]
+        value: 0.75
+        rationale: "Gently sloping areas that retain water but drain slightly faster; good enhancement potential."
+      - range: [2, 3]
+        value: 0.5
+        rationale: "Moderately sloped ground with some runoff; limited but possible enhancement feasibility."
+      - range: [3, 5]
+        value: 0.25
+        rationale: "Steeper terrain with faster drainage; less suitable for long-term hydrologic retention."
+      - range: [5, null]
+        value: 0.0
+        rationale: "Too steep for wetland development; high runoff and erosion risk."
+
+  soil_drainage_class:
+    description: "Suitability recode for soil drainage class."
+    classes:
+      very_poorly_drained:
+        value: 1.0
+        rationale: "Hydric soils with sustained saturation; ideal wetland conditions."
+      poorly_drained:
+        value: 1.0
+        rationale: "High water table and persistent moisture; excellent for wetland persistence."
+      somewhat_poorly_drained:
+        value: 0.5
+        rationale: "Moderately wet soils with transitional potential for wetland establishment."
+      moderately_well_drained:
+        value: 0.5
+        rationale: "Retains limited moisture; borderline feasibility for enhancement."
+      well_or_excessively_drained:
+        value: 0.0
+        rationale: "Too dry; unsuitable for wetland hydrology."
